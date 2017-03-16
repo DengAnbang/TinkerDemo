@@ -26,4 +26,46 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.0'
     testCompile 'junit:junit:4.12'
+
+    provided('com.tencent.tinker:tinker-android-anno:1.7.7')
+    compile('com.tencent.tinker:tinker-android-lib:1.7.7')
+}
+
+if (true) {
+    def oldApkPath = 'K://app-debug.apk'
+    def tinker_id = 1.1
+    apply plugin: 'com.tencent.tinker.patch'
+    tinkerPatch {
+        ignoreWarning = false
+        useSign = true
+        oldApk = oldApkPath
+
+        buildConfig {
+            tinkerId = tinker_id
+        }
+        packageConfig{
+            configField("TINKER_ID", "tinker_id_1.0")
+        }
+        dex {
+            dexMode = "jar"
+            pattern = ["classes*.dex", "assets/secondary-dex-?.jar"]
+//            loader = ["com.tencent.tinker.loader.*", "ook.yzx.tinker.Application"]
+            loader = [
+                    //use sample, let BaseBuildInfo unchangeable with tinker
+                    "tinker.sample.android.app.BaseBuildInfo"
+            ]
+        }
+        lib {
+            pattern = ["lib/*/*.so"]
+        }
+        res {
+            pattern = ["res/*", "assets/*", "resources.arsc", "AndroidManifest.xml"]
+            ignoreChange = ["assets/sample_meta.txt"]
+            largeModSize = 100
+        }
+        sevenZip {
+            zipArtifact = "com.tencent.mm:SevenZip:1.1.10"
+        }
+    }
+
 }
