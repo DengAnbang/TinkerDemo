@@ -1,10 +1,12 @@
 package com.example.dab.tinkerdemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,12 +15,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView textView = (TextView) findViewById(R.id.tv);
-        textView.setText("打撒大多");
+        Test test = new Test();
+        textView.setText(test.getName());
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "45646", Toast.LENGTH_SHORT).show();
+                TinkerInstaller.onReceiveUpgradePatch(getApplication(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
             }
         });
+    }
+
+    public void sada(View view) {
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

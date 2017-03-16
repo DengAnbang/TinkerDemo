@@ -44,7 +44,7 @@ if (true) {
             tinkerId = tinker_id
         }
         packageConfig{
-            configField("TINKER_ID", "tinker_id_1.0")
+            configField("TINKER_ID", "tinker_id_1.1")
         }
         dex {
             dexMode = "jar"
