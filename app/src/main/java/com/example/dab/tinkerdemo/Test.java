@@ -5,7 +5,7 @@ package com.example.dab.tinkerdemo;
  */
 
 public class Test {
-    private String name = "saddas";
+    private String name = "傻傻哒";
 
     public String getName() {
         return name;

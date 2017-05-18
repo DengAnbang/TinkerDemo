@@ -33,7 +33,9 @@ public class AppLike extends DefaultApplicationLike {
         try {
 
             TinkerInstaller.install(this,
-                    new DefaultLoadReporter(getApplication()), new DefaultPatchReporter(getApplication()), new DefaultPatchListener(getApplication()),
+                    new DefaultLoadReporter(getApplication()),
+                    new DefaultPatchReporter(getApplication()),
+                    new DefaultPatchListener(getApplication()),
                     SuccessService.class, new UpgradePatch());
             Log.e(TAG, "onBaseContextAttached: " );
         } catch (Exception e) {
